@@ -1,234 +1,583 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Portfolio" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <script
-      src="https://kit.fontawesome.com/36340d48b5.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="styles.css" />
-    <title>Akshay Kumar</title>
-  </head>
-  <body class="light" id="top">
-    <header class="header center">
-      <h3>
-        <a href="https://github.com/AkshayKumar-0/my-portfolio.git" class="link"
-          >AK</a
-        >
-      </h3>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="Akshay Kumar — Front-End Developer specializing in React.js, Next.js, WordPress & Shopify. Open to full-time opportunities.">
+<meta name="keywords" content="Front-End Developer, React.js, Next.js, WordPress, Shopify, Akshay Kumar">
+<meta name="author" content="Akshay Kumar">
+<meta property="og:title" content="Akshay Kumar — Front-End Developer">
+<meta property="og:description" content="I craft responsive, user-friendly web experiences using React.js, Next.js, WordPress & Shopify.">
+<title>Akshay Kumar — Front-End Developer</title>
 
-      <nav class="nav center">
-        <ul class="nav__list center">
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#projects">Projects</a>
-          </li>
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#skills">Skills</a>
-          </li>
-          <li class="nav__list-item">
-            <a class="link link--nav" href="#contact">Contact</a>
-          </li>
-        </ul>
+<!-- ✅ FIX 1: Preconnect to font origins BEFORE font request (saves ~200ms) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        <button type="button" aria-label="toggle theme" class="btn btn--icon">
-          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
-        </button>
+<!-- ✅ FIX 2: Preload hero image so browser fetches it ASAP (put your image path here) -->
+<link rel="preload" as="image" href="image/profile.webp" fetchpriority="high" type="image/webp">
 
-        <button
-          type="button"
-          aria-label="toggle navigation"
-          class="btn btn--icon nav__hamburger"
-        >
-          <i aria-hidden="true" class="fas fa-bars"></i>
-        </button>
-      </nav>
-    </header>
+<!-- ✅ FIX 3: Non-blocking font load with display=swap — text shows immediately in fallback font -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 
-    <main>
-      <!-- About -->
-      <div class="about center">
-        <h1>Hi, I am <span class="about__name">Akshay Kumar.</span></h1>
-        <h2 class="about__role">A Front-end Developer.</h2>
-        <p class="about__desc">
-          Website Development is my passion. I love creating experience for
-          users that have meaning and impact.“Make it simple, but significant.”
-        </p>
+<style>
+  /* Google Fonts URL already includes display=swap — no @font-face needed here */
 
-        <div class="about__contact center">
-          <a href="https://drive.google.com/file/d/135vp0tS19JmNHPugWFMyf7rDOc7fWmkZ/view?usp=drive_link">
-            <span class="btn btn--outline">Resume</span>
-          </a>
+  :root {
+    --dark: #0d0d0d; --dark2: #141414; --dark3: #1c1c1c;
+    --cream: #f2ece2; --cream2: #e8e1d5; --cream3: #d4c9b8;
+    --gold: #c8a96e; --gold2: #a88c52;
+    --text-dark: #0d0d0d; --text-light: #f2ece2;
+    --text-muted-light: #8a7f72;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Outfit', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--dark); color: var(--text-light); overflow-x: hidden; cursor: none; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--dark); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
 
-          <a
-            href="https://github.com/AkshayKumar-0"
-            aria-label="github"
-            class="link link--icon"
-          >
-            <i aria-hidden="true" class="fab fa-github"></i>
-          </a>
+  /* CURSOR — desktop: gold dot + ring (original) */
+  .cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.1s; }
+  .cursor-follower { position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: transform 0.15s ease, width 0.2s, height 0.2s, opacity 0.2s; opacity: 0.5; }
 
-          <a
-            href="https://www.linkedin.com/in/akshay--kumar-/"
-            aria-label="linkedin"
-            class="link link--icon"
-          >
-            <i aria-hidden="true" class="fab fa-linkedin"></i>
-          </a>
-        </div>
-      </div>
+  /* CURSOR — mobile: gold tap-ripple on touch */
+  .touch-ripple {
+    position: fixed;
+    width: 0; height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,110,0.55) 0%, rgba(200,169,110,0.08) 60%, transparent 100%);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%) scale(0);
+    animation: touchRippleAnim 0.55s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+  }
+  @keyframes touchRippleAnim {
+    0%   { width: 0px; height: 0px; opacity: 1; transform: translate(-50%,-50%) scale(0); }
+    40%  { opacity: 0.9; }
+    100% { width: 80px; height: 80px; opacity: 0; transform: translate(-50%,-50%) scale(1); }
+  }
 
-      <!-- Projects -->
-      <section id="projects" class="section projects">
-        <h2 class="section__title">Projects</h2>
+  /* NAVBAR */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 24px 60px; display: flex; justify-content: space-between; align-items: center; transition: background 0.4s, padding 0.4s; }
+  nav.scrolled { background: rgba(13,13,13,0.95); backdrop-filter: blur(16px); padding: 16px 60px; border-bottom: 1px solid rgba(200,169,110,0.15); }
+  .nav-logo { font-family: var(--font-serif); font-size: 22px; font-weight: 500; color: var(--cream); text-decoration: none; letter-spacing: 0.03em; }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 12px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream3); text-decoration: none; transition: color 0.3s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px 24px; border: 1px solid var(--gold); color: var(--gold); text-decoration: none; transition: all 0.3s; }
+  .nav-cta:hover { background: var(--gold); color: var(--dark); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { width: 24px; height: 1.5px; background: var(--cream); display: block; transition: all 0.3s; }
 
-        <div class="projects__grid">
-          <div class="project">
-            <h3>Little Lemon Static and Responsive page</h3>
-            <p class="project__description">
-              The Little Lemon website is a simple, clean, and responsive static
-              page designed to showcase a restaurant's offerings. It features
-              key sections like the menu, booking options, and opening hours.
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">HTML</li>
-              <li class="project__stack-item">CSS</li>
-              <li class="project__stack-item">JavaScript</li>
-            </ul>
+  /* HERO */
+  .hero { min-height: 100vh; background: var(--dark); display: flex; align-items: center; padding: 120px 60px 80px; position: relative; overflow: hidden; }
+  .hero-bg-text { position: absolute; font-family: var(--font-serif); font-size: clamp(120px,18vw,260px); font-weight: 300; color: rgba(200,169,110,0.04); white-space: nowrap; bottom: -30px; right: -20px; letter-spacing: -0.04em; pointer-events: none; user-select: none; }
+  .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; max-width: 1300px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+  .hero-tag { display: inline-block; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(200,169,110,0.3); padding: 6px 16px; margin-bottom: 32px; animation: fadeUp 0.8s 0.2s ease both; }
+  .hero-name { font-family: var(--font-serif); font-size: clamp(52px,7vw,96px); font-weight: 300; line-height: 1.02; color: var(--cream); letter-spacing: -0.02em; margin-bottom: 12px; animation: fadeUp 0.8s 0.4s ease both; }
+  .hero-name em { font-style: italic; color: var(--gold); }
+  .hero-role { font-size: clamp(14px,1.8vw,18px); font-weight: 300; color: #888; letter-spacing: 0.05em; margin-bottom: 40px; min-height: 28px; animation: fadeUp 0.8s 0.6s ease both; }
+  .hero-role .typed { color: var(--cream2); }
+  .hero-role .cursor-blink { color: var(--gold); animation: blink 0.8s infinite; }
+  .hero-desc { font-size: 15px; line-height: 1.8; font-weight: 300; color: #7a7a7a; max-width: 520px; margin-bottom: 48px; animation: fadeUp 0.8s 0.8s ease both; }
+  .hero-actions { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; animation: fadeUp 0.8s 1s ease both; }
+  .btn-primary { padding: 14px 36px; background: var(--gold); color: var(--dark); font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+  .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); }
+  .btn-secondary { padding: 14px 36px; border: 1px solid rgba(242,236,226,0.2); color: var(--cream3); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-            <a
-              href="https://github.com"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://akshaykumar-0.github.io/Little-Lemon-Static/"
-              aria-label="live preview"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
+  /* ✅ FIX 5: Image sizing — no base64, just a proper img element */
+  .hero-photo-wrap { width: 340px; height: 420px; position: relative; animation: fadeIn 1s 0.6s ease both; flex-shrink: 0; }
+  .hero-photo-border { position: absolute; top: -16px; left: -16px; right: 16px; bottom: 16px; border: 1px solid rgba(200,169,110,0.3); pointer-events: none; }
+  .hero-photo {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top center;
+    display: block;
+    filter: grayscale(15%) contrast(1.05);
+    /* ✅ Reserves space while loading — prevents layout shift (CLS) */
+    background-color: var(--dark3);
+  }
+  .hero-photo-tag { position: absolute; bottom: -28px; left: -28px; background: var(--gold); color: var(--dark); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 18px; }
+  .hero-scroll { position: absolute; bottom: 40px; left: 60px; display: flex; align-items: center; gap: 16px; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: #555; animation: fadeIn 1s 1.4s ease both; }
+  .hero-scroll-line { width: 60px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); animation: scrollLine 2s ease-in-out infinite; }
+  .hero-socials { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 20px; animation: fadeIn 1s 1.2s ease both; }
+  .hero-social-link { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: #555; text-decoration: none; writing-mode: vertical-rl; transition: color 0.3s; }
+  .hero-social-link:hover { color: var(--gold); }
 
-          <div class="project">
-            <h3>Little Lemon App</h3>
-            <p class="project__description">
-              I developed the Little Lemon app as part of Meta’s Front-End
-              Developer Certificate. This project enhances a restaurant's table
-              reservation system using React JS, Typescript, Styled Components,
-              Formik, and is tested with Jest.
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">ReactJS</li>
-              <li class="project__stack-item">TypeScript</li>
-              <li class="project__stack-item">Git and GitHub</li>
-            </ul>
+  /* SECTIONS */
+  .section-dark { background: var(--dark2); }
+  .section-cream { background: var(--cream); color: var(--text-dark); }
+  .section-darkest { background: var(--dark); }
+  .section-inner { max-width: 1300px; margin: 0 auto; padding: 110px 60px; }
+  .section-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 16px; }
+  .section-label::before { content: ''; width: 40px; height: 1px; background: var(--gold); display: block; }
+  .section-title { font-family: var(--font-serif); font-size: clamp(36px,5vw,60px); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 60px; }
+  .section-title em { font-style: italic; }
+  .section-dark .section-title, .section-darkest .section-title { color: var(--cream); }
+  .section-cream .section-title { color: var(--text-dark); }
+  .section-cream .section-label { color: var(--gold2); }
+  .section-cream .section-label::before { background: var(--gold2); }
 
-            <a
-              href="https://github.com"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://akshaykumar-0.github.io/Little-Lemon/"
-              aria-label="live preview"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .about-text p { font-size: 16px; line-height: 1.85; font-weight: 300; color: #4a4440; margin-bottom: 20px; }
+  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; padding-top: 48px; border-top: 1px solid var(--cream3); }
+  .stat-num { font-family: var(--font-serif); font-size: 44px; font-weight: 300; color: var(--text-dark); line-height: 1; }
+  .stat-num span { font-size: 24px; color: var(--gold2); }
+  .stat-label { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted-light); margin-top: 6px; }
+  .about-detail-item { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--cream3); align-items: flex-start; }
+  .about-detail-icon { width: 36px; height: 36px; border: 1px solid var(--cream3); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .about-detail-label { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted-light); margin-bottom: 4px; }
+  .about-detail-value { font-size: 14px; font-weight: 400; color: var(--text-dark); }
 
-          <div class="project">
-            <h3>Food Yummy</h3>
-            <p class="project__description">
-              A dynamic and responsive food website created using HTML, CSS, and
-              JavaScript, showcasing a modern design and smooth user experience.
-            </p>
-            <ul class="project__stack">
-              <li class="project__stack-item">HTML</li>
-              <li class="project__stack-item">CSS</li>
-              <li class="project__stack-item">JavaScript</li>
-            </ul>
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .skill-category { background: var(--dark3); padding: 36px 32px; position: relative; overflow: hidden; transition: background 0.3s; }
+  .skill-category:hover { background: #222; }
+  .skill-category-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg,var(--gold),transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+  .skill-category:hover .skill-category-line { transform: scaleX(1); }
+  .skill-cat-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag { font-size: 12px; padding: 6px 14px; border: 1px solid rgba(242,236,226,0.1); color: var(--cream3); transition: all 0.3s; letter-spacing: 0.04em; }
+  .skill-tag:hover { border-color: var(--gold); color: var(--gold); }
 
-            <a
-              href="https://github.com"
-              aria-label="source code"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fab fa-github"></i>
-            </a>
-            <a
-              href="https://akshaykumar-0.github.io/foodwebsite/"
-              aria-label="live preview"
-              class="link link--icon"
-            >
-              <i aria-hidden="true" class="fas fa-external-link-alt"></i>
-            </a>
-          </div>
-        </div>
-      </section>
+  /* EXPERIENCE */
+  .timeline { position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 200px; top: 0; bottom: 0; width: 1px; background: var(--cream3); }
+  .timeline-item { display: grid; grid-template-columns: 200px 1fr; gap: 48px; margin-bottom: 56px; position: relative; }
+  .timeline-item::before { content: ''; position: absolute; left: 195px; top: 10px; width: 11px; height: 11px; border-radius: 50%; background: var(--cream); border: 2px solid var(--gold2); z-index: 1; }
+  .timeline-date { text-align: right; padding-right: 48px; }
+  .timeline-date-period { font-size: 11px; letter-spacing: 0.1em; color: var(--gold2); text-transform: uppercase; margin-bottom: 4px; }
+  .timeline-date-place { font-size: 12px; color: var(--text-muted-light); }
+  .timeline-role { font-family: var(--font-serif); font-size: 22px; font-weight: 400; color: var(--text-dark); margin-bottom: 4px; }
+  .timeline-company { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold2); margin-bottom: 14px; }
+  .timeline-desc { font-size: 14px; line-height: 1.75; font-weight: 300; color: #5a5248; }
 
-      <!-- Skills -->
-      <section class="section skills" id="skills">
-        <h2 class="section__title">Skills</h2>
-        <ul class="skills__list">
-          <li class="skills__list-item btn btn--plain">HTML</li>
-          <li class="skills__list-item btn btn--plain">CSS</li>
-          <li class="skills__list-item btn btn--plain">UX/UI</li>
-          <li class="skills__list-item btn btn--plain">JavaScript</li>
-          <li class="skills__list-item btn btn--plain">TypeScript</li>
-          <li class="skills__list-item btn btn--plain">React</li>
-          <li class="skills__list-item btn btn--plain">Figma</li>
-          <li class="skills__list-item btn btn--plain">Git and GitHub</li>
-          <li class="skills__list-item btn btn--plain">Chakra UI</li>
-          <li class="skills__list-item btn btn--plain">Jest</li>
-          <li class="skills__list-item btn btn--plain">CI/CD</li>
-        </ul>
-      </section>
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+  .project-card { background: var(--dark3); padding: 40px 36px; position: relative; overflow: hidden; transition: transform 0.3s; display: flex; flex-direction: column; }
+  .project-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,rgba(200,169,110,0.06) 0%,transparent 60%); opacity: 0; transition: opacity 0.4s; }
+  .project-card:hover { transform: translateY(-4px); }
+  .project-card:hover::after { opacity: 1; }
+  .project-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+  .project-type { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; padding: 5px 12px; border: 1px solid rgba(200,169,110,0.25); color: var(--gold); }
+  .project-links { display: flex; gap: 10px; }
+  .project-link { width: 40px; height: 40px; border: 1px solid rgba(242,236,226,0.1); display: flex; align-items: center; justify-content: center; color: var(--cream3); font-size: 16px; text-decoration: none; transition: all 0.3s; cursor: pointer; padding: 8px; box-sizing: border-box; position: relative; z-index: 10000; }
+  .project-link:hover { border-color: var(--gold); color: var(--gold); }
+  .project-title { font-family: var(--font-serif); font-size: 24px; font-weight: 400; color: var(--cream); margin-bottom: 12px; line-height: 1.25; }
+  .project-desc { font-size: 13px; line-height: 1.7; font-weight: 300; color: #666; margin-bottom: 24px; flex: 1; }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+  .project-tech-tag { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 10px; background: rgba(242,236,226,0.05); color: #888; border: 1px solid rgba(242,236,226,0.07); }
+  .project-period { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #555; margin-bottom: 20px; }
 
-      <!-- Contact -->
-      <section class="section contact center" id="contact">
-        <h2 class="section__title">Contact</h2>
-        <a href="mailto:akshay6885@gmail.com">
-          <span class="btn btn--outline">Email me</span>
-        </a>
-      </section>
-    </main>
+  /* CERTIFICATIONS */
+  .certs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+  .cert-card { border: 1px solid var(--cream3); padding: 36px 32px; position: relative; transition: all 0.3s; overflow: hidden; }
+  .cert-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg,var(--gold2),transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+  .cert-card:hover { border-color: var(--gold2); transform: translateY(-3px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); }
+  .cert-card:hover::before { transform: scaleX(1); }
+  .cert-icon { width: 44px; height: 44px; margin-bottom: 20px; border: 1px solid var(--cream3); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .cert-issuer { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold2); margin-bottom: 8px; }
+  .cert-title { font-family: var(--font-serif); font-size: 20px; font-weight: 400; color: var(--text-dark); margin-bottom: 12px; line-height: 1.3; }
+  .cert-date { font-size: 12px; color: var(--text-muted-light); margin-bottom: 20px; }
+  .cert-verify { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold2); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+  .cert-verify:hover { border-color: var(--gold2); }
 
-    <footer class="footer">
-      <a
-        href="https://www.linkedin.com/in/akshay--kumar-/"
-        class="link footer__link"
-      >
-        Created By Akshay Kumar. <br />
-      </a>
-      <a
-        href="https://github.com/AkshayKumar-0/my-portfolio.git"
-        class="link footer__link"
-      >
-        &copy;Copyright 2024. All rights reserved.
-      </a>
-    </footer>
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+  .contact-big-text { font-family: var(--font-serif); font-size: clamp(44px,6vw,80px); font-weight: 300; color: var(--cream); line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 32px; }
+  .contact-big-text em { font-style: italic; color: var(--gold); }
+  .contact-desc { font-size: 15px; line-height: 1.8; font-weight: 300; color: #666; margin-bottom: 48px; }
+  .contact-links { display: flex; flex-direction: column; gap: 20px; }
+  .contact-link-item { display: flex; align-items: center; gap: 20px; text-decoration: none; }
+  .contact-link-icon { width: 44px; height: 44px; border: 1px solid rgba(200,169,110,0.2); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--gold); transition: all 0.3s; flex-shrink: 0; }
+  .contact-link-text { font-size: 14px; color: #888; transition: color 0.3s; }
+  .contact-link-item:hover .contact-link-icon { background: var(--gold); color: var(--dark); }
+  .contact-link-item:hover .contact-link-text { color: var(--cream); }
+  .contact-cta-box { border: 1px solid rgba(200,169,110,0.2); padding: 48px 44px; text-align: center; position: relative; }
+  .contact-cta-box::before { content: '"'; font-family: var(--font-serif); font-size: 120px; font-style: italic; color: rgba(200,169,110,0.08); position: absolute; top: -20px; left: 20px; line-height: 1; }
+  .contact-cta-text { font-family: var(--font-serif); font-size: 22px; font-weight: 300; font-style: italic; color: var(--cream2); line-height: 1.6; margin-bottom: 36px; }
+  .contact-cta-btn { display: inline-block; padding: 14px 44px; background: var(--gold); color: var(--dark); font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+  .contact-cta-btn:hover { background: var(--gold2); transform: translateY(-2px); }
 
-    <div class="scroll-container">
-      <div class="scroll-top">
-        <a aria-label="Scroll up" href="#top">
-          <i aria-hidden="true" class="fas fa-arrow-up"></i>
-        </a>
+  /* FOOTER */
+  footer { background: #080808; padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(200,169,110,0.1); }
+  .footer-copy { font-size: 12px; color: #444; letter-spacing: 0.06em; }
+  .footer-copy span { color: var(--gold); }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-link { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #444; text-decoration: none; transition: color 0.3s; }
+  .footer-link:hover { color: var(--gold); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  @keyframes scrollLine { 0%,100%{width:60px} 50%{width:80px} }
+  .reveal { opacity:0; transform:translateY(32px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+  .reveal-delay-1 { transition-delay:0.1s; }
+  .reveal-delay-2 { transition-delay:0.2s; }
+  .reveal-delay-3 { transition-delay:0.3s; }
+  .reveal-delay-4 { transition-delay:0.4s; }
+
+  /* ✅ FIX 6: Reduce motion for users who prefer it (also speeds up perceived performance) */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  /* ✅ FIX 7: content-visibility defers rendering of off-screen sections (huge mobile win) */
+  #about, #skills, #experience, #projects, #certifications, #contact {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 600px; /* estimated section height */
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    nav { padding: 20px 40px; }
+    .section-inner { padding: 90px 40px; }
+    .hero { padding: 120px 40px 80px; }
+    .hero-socials { display: none; }
+  }
+  @media (max-width: 768px) {
+    /* ✅ Mobile has its own touch ripple cursor — hide the desktop dot/ring only */
+    body { cursor: auto; }
+    .cursor, .cursor-follower { display: none; }
+    nav { padding: 18px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-photo-wrap { width: 260px; height: 320px; margin: 0 auto; }
+    /* ✅ Disable heavy bg text on mobile — saves paint cost */
+    .hero-bg-text { display: none; }
+    .hero-scroll { left: 24px; bottom: 24px; }
+    .section-inner { padding: 70px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .timeline::before { left: 0; }
+    .timeline-item { grid-template-columns: 1fr; gap: 8px; }
+    .timeline-item::before { left: -5px; top: 6px; }
+    .timeline-date { text-align: left; padding-right: 0; padding-left: 20px; }
+    .timeline-content { padding-left: 20px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 28px 24px; }
+    /* ✅ Reduce animation on mobile for speed */
+    .hero-tag, .hero-name, .hero-role, .hero-desc, .hero-actions, .hero-photo-wrap {
+      animation-duration: 0.4s;
+      animation-delay: 0s !important;
+    }
+  }
+  @media (max-width: 480px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-name { font-size: 48px; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ✅ Cursor only shown on desktop via CSS above -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">AK<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+  <a href="https://drive.google.com/file/d/135vp0tS19JmNHPugWFMyf7rDOc7fWmkZ/view?usp=drive_link" target="_blank" class="nav-cta">Resume</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-text">Developer</div>
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-tag">Available for Opportunities</div>
+      <h1 class="hero-name">Akshay<br><em>Kumar</em></h1>
+      <p class="hero-role"><span class="typed" id="typedText"></span><span class="cursor-blink">|</span></p>
+      <p class="hero-desc">I craft responsive, user-friendly web experiences using React.js, Next.js, WordPress &amp; Shopify. From startup dashboards to client websites, I turn ideas into polished digital products.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-secondary">Get In Touch</a>
       </div>
     </div>
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-border"></div>
+      <!--
+        ✅ YOUR IMAGE: image/profile.webp (image folder, profile.webp file)
+        fetchpriority="high" = browser downloads this before other images
+        loading="eager"      = do NOT lazy-load (it's above the fold)
+      -->
+      <img
+        class="hero-photo"
+        src="image/profile.webp"
+        alt="Akshay Kumar — Front-End Developer"
+        width="340"
+        height="420"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+      >
+      <div class="hero-photo-tag">Front-End Dev</div>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div><span>Scroll to explore</span></div>
+  <div class="hero-socials">
+    <a href="https://github.com/AkshayKumar-0" target="_blank" rel="noopener" class="hero-social-link">GitHub</a>
+    <a href="https://www.linkedin.com/in/akshay--kumar-/" target="_blank" rel="noopener" class="hero-social-link">LinkedIn</a>
+  </div>
+</section>
 
-    <script src="./script.js"></script>
-  </body>
+<!-- ABOUT -->
+<section class="section-cream" id="about">
+  <div class="section-inner">
+    <div class="section-label">About Me</div>
+    <h2 class="section-title">Crafting Interfaces<br>with <em>Purpose &amp; Precision</em></h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a Front-End Developer from Rajasthan, India passionate about crafting intuitive, pixel-perfect web experiences. As an MCA graduate with hands-on experience across React, Next.js, WordPress, and Shopify, I blend technical expertise with a designer's perspective to deliver polished digital products.</p>
+        <p>I've built cloud hosting dashboards, fitness tracking platforms, luxury e-commerce sites, and corporate web solutions for startups and established businesses. Every project I undertake reflects my commitment to clean code, responsive design, and exceptional user experience.</p>
+        <div class="about-stats">
+          <div class="reveal reveal-delay-1"><div class="stat-num">5<span>+</span></div><div class="stat-label">Projects Delivered</div></div>
+          <div class="reveal reveal-delay-2"><div class="stat-num">1<span>yr</span></div><div class="stat-label">Professional Exp.</div></div>
+          <div class="reveal reveal-delay-3"><div class="stat-num">3<span>+</span></div><div class="stat-label">Freelance Clients</div></div>
+          <div class="reveal reveal-delay-4"><div class="stat-num">9</div><div class="stat-label">Meta Courses Done</div></div>
+        </div>
+      </div>
+      <div class="about-right reveal reveal-delay-2">
+        <div class="about-detail-item"><div class="about-detail-icon">📍</div><div><div class="about-detail-label">Location</div><div class="about-detail-value">Rajasthan, India</div></div></div>
+        <div class="about-detail-item"><div class="about-detail-icon">🎓</div><div><div class="about-detail-label">Education</div><div class="about-detail-value">MCA — University of Technology, Jaipur</div></div></div>
+        <div class="about-detail-item"><div class="about-detail-icon">💼</div><div><div class="about-detail-label">Current Status</div><div class="about-detail-value">Open to Full-Time Opportunities</div></div></div>
+        <div class="about-detail-item"><div class="about-detail-icon">✉️</div><div><div class="about-detail-label">Email</div><div class="about-detail-value">akshay6885@gmail.com</div></div></div>
+        <div class="about-detail-item"><div class="about-detail-icon">🌐</div><div><div class="about-detail-label">Languages</div><div class="about-detail-value">Hindi &amp; English</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section-dark" id="skills">
+  <div class="section-inner">
+    <div class="section-label">Technical Skills</div>
+    <h2 class="section-title">Tools &amp; <em>Technologies</em></h2>
+    <div class="skills-grid">
+      <div class="skill-category reveal"><div class="skill-category-line"></div><div class="skill-cat-title">Frontend Core</div><div class="skill-tags"><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span><span class="skill-tag">TypeScript</span></div></div>
+      <div class="skill-category reveal reveal-delay-1"><div class="skill-category-line"></div><div class="skill-cat-title">Frameworks &amp; Libraries</div><div class="skill-tags"><span class="skill-tag">React.js</span><span class="skill-tag">Next.js</span><span class="skill-tag">Bootstrap</span><span class="skill-tag">Chakra UI</span></div></div>
+      <div class="skill-category reveal reveal-delay-2"><div class="skill-category-line"></div><div class="skill-cat-title">CMS &amp; E-Commerce</div><div class="skill-tags"><span class="skill-tag">WordPress</span><span class="skill-tag">Shopify</span><span class="skill-tag">WooCommerce</span></div></div>
+      <div class="skill-category reveal reveal-delay-1"><div class="skill-category-line"></div><div class="skill-cat-title">Design &amp; UX</div><div class="skill-tags"><span class="skill-tag">Figma</span><span class="skill-tag">UX/UI Design</span><span class="skill-tag">Responsive Design</span></div></div>
+      <div class="skill-category reveal reveal-delay-2"><div class="skill-category-line"></div><div class="skill-cat-title">Dev Tools</div><div class="skill-tags"><span class="skill-tag">Git &amp; GitHub</span><span class="skill-tag">Jest</span><span class="skill-tag">CI/CD</span><span class="skill-tag">VS Code</span></div></div>
+      <div class="skill-category reveal reveal-delay-3"><div class="skill-category-line"></div><div class="skill-cat-title">Soft Skills</div><div class="skill-tags"><span class="skill-tag">Team Collaboration</span><span class="skill-tag">Problem Solving</span><span class="skill-tag">Client Comm.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section-cream" id="experience">
+  <div class="section-inner">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">My Professional <em>Journey</em></h2>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-date"><div class="timeline-date-period">Dec 2024 – Jun 2025</div><div class="timeline-date-place">Jaipur, Rajasthan</div></div>
+        <div class="timeline-content"><div class="timeline-role">Front-End Developer Intern</div><div class="timeline-company">3 Edge Technologies</div><div class="timeline-desc">Collaborated with the development team to implement responsive, user-friendly interfaces. Contributed to projects including CloudMinister (web hosting platform) and Healthonify (fitness web app), focusing on UI components using React.js and Next.js. Assisted in debugging and optimizing front-end performance to enhance user experience.</div></div>
+      </div>
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-date"><div class="timeline-date-period">Dec 2022 – Jan 2023</div><div class="timeline-date-place">Alwar, Rajasthan</div></div>
+        <div class="timeline-content"><div class="timeline-role">Data Entry Volunteer</div><div class="timeline-company">Ministry of Cooperation, Govt. of India</div><div class="timeline-desc">Assisted the Nodal Officer Cooperative Society in preparation of the National Cooperative Database for cooperative societies working in PACS, Dairy &amp; Fishery sectors in Alwar district. Certified by AICTE.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section-darkest" id="projects">
+  <div class="section-inner">
+    <div class="section-label">Portfolio</div>
+    <h2 class="section-title">Selected <em>Work</em></h2>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-card-top"><span class="project-type">Professional</span><div class="project-links"><a href="https://cloudminister.com/" target="_blank" rel="noopener" class="project-link" title="Live Site">↗</a></div></div>
+        <div class="project-period">Dec 2024 – Jun 2025</div>
+        <h3 class="project-title">CloudMinister</h3>
+        <p class="project-desc">Multi-cloud hosting platform offering AWS, Azure, Google Cloud &amp; Akamai services. Developed responsive UI components, real-time pricing pages, and an intuitive dashboard for managing hosting services, domains &amp; SSL certificates.</p>
+        <div class="project-tech"><span class="project-tech-tag">Next.js</span><span class="project-tech-tag">React.js</span><span class="project-tech-tag">Bootstrap</span><span class="project-tech-tag">HTML/CSS</span></div>
+      </div>
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-card-top"><span class="project-type">Professional</span><div class="project-links"><a href="https://healthonify.com/" target="_blank" rel="noopener" class="project-link" title="Live Site">↗</a></div></div>
+        <div class="project-period">Dec 2024 – Apr 2025</div>
+        <h3 class="project-title">Healthonify</h3>
+        <p class="project-desc">A fitness web application featuring a dashboard to track workouts, diets, and personalized health recommendations. Built a responsive and intuitive UI with modern design standards in a collaborative team environment.</p>
+        <div class="project-tech"><span class="project-tech-tag">React.js</span><span class="project-tech-tag">TypeScript</span><span class="project-tech-tag">Bootstrap</span><span class="project-tech-tag">HTML/CSS</span></div>
+      </div>
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-card-top"><span class="project-type">Personal</span><div class="project-links"><a href="https://akshaykumar-0.github.io/Vogue-Enclave-Interiors/" target="_blank" rel="noopener" class="project-link" title="Live Site">↗</a></div></div>
+        <div class="project-period">Dec 2024 – Jun 2025</div>
+        <h3 class="project-title">Vogue Enclave Interiors</h3>
+        <p class="project-desc">A luxury interior design website featuring multi-page layout including services, projects gallery, architecture, furniture categories, blog, and contact. Focused on elegant UI with smooth navigation and rich visual design.</p>
+        <div class="project-tech"><span class="project-tech-tag">HTML5</span><span class="project-tech-tag">CSS3</span><span class="project-tech-tag">JavaScript</span></div>
+      </div>
+      <div class="project-card reveal">
+        <div class="project-card-top"><span class="project-type">Freelance</span><div class="project-links"><a href="https://intellibiinnovations.com/" target="_blank" rel="noopener" class="project-link" title="Live Site">↗</a></div></div>
+        <div class="project-period">Jul 2025 – Apr 2026</div>
+        <h3 class="project-title">IntelliBI Innovations</h3>
+        <p class="project-desc">Corporate website for an IT solutions company offering services in Cyber Security, Data Analytics, Web Development, App Development, and Corporate Training. Built on WordPress with custom design and responsive layout.</p>
+        <div class="project-tech"><span class="project-tech-tag">WordPress</span><span class="project-tech-tag">HTML/CSS</span><span class="project-tech-tag">JavaScript</span></div>
+      </div>
+      <div class="project-card reveal reveal-delay-1">
+        <div class="project-card-top"><span class="project-type">Freelance</span><div class="project-links"><a href="https://thegreenparadise.co.in/" target="_blank" rel="noopener" class="project-link" title="Live Site">↗</a></div></div>
+        <div class="project-period">Dec 2025 – Mar 2026</div>
+        <h3 class="project-title">Thegreenparadise</h3>
+        <p class="project-desc">E-commerce website for a plant &amp; gardening brand built on WordPress with WooCommerce. Features product listings, custom categories, and a clean responsive design tailored for a nature-focused audience.</p>
+        <div class="project-tech"><span class="project-tech-tag">WordPress</span><span class="project-tech-tag">WooCommerce</span><span class="project-tech-tag">CSS</span></div>
+      </div>
+      <div class="project-card reveal reveal-delay-2">
+        <div class="project-card-top"><span class="project-type">Freelance</span><div class="project-links"><a href="https://minikidsmart.in/" target="_blank" rel="noopener" class="project-link" title="Live Site">↗</a></div></div>
+        <div class="project-period">Dec 2025 – Mar 2026</div>
+        <h3 class="project-title">MiniKidsMart</h3>
+        <p class="project-desc">Shopify-powered kids learning &amp; activity products store featuring stationery, custom stickers, and puzzle books. Focused on a playful UI, smooth checkout flow, and mobile-first responsive layout.</p>
+        <div class="project-tech"><span class="project-tech-tag">Shopify</span><span class="project-tech-tag">Liquid</span><span class="project-tech-tag">CSS</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section-cream" id="certifications">
+  <div class="section-inner">
+    <div class="section-label">Certifications</div>
+    <h2 class="section-title">Credentials &amp; <em>Achievements</em></h2>
+    <div class="certs-grid">
+      <div class="cert-card reveal reveal-delay-1"><div class="cert-icon">💼</div><div class="cert-issuer">3 Edge Technologies</div><div class="cert-title">Frontend Development Internship</div><div class="cert-date">Dec 9, 2024 – June 30, 2025 · Jaipur</div><a href="https://drive.google.com/file/d/11xqzIlYGfDJxVh8OZXFAJNv1UMXsaM-k/view?usp=drive_link" target="_blank" rel="noopener" class="cert-verify">Verify Certificate →</a></div>
+      <div class="cert-card reveal"><div class="cert-icon">🎓</div><div class="cert-issuer">Meta × Coursera</div><div class="cert-title">Meta Front-End Developer</div><div class="cert-date">Completed September 7, 2024 · 9 Courses</div><a href="https://www.coursera.org/account/accomplishments/professional-cert/8YSJJOZ44F9Z" target="_blank" rel="noopener" class="cert-verify">Verify Certificate →</a></div>
+      <div class="cert-card reveal reveal-delay-2"><div class="cert-icon">🇮🇳</div><div class="cert-issuer">Ministry of Cooperation, Govt. of India</div><div class="cert-title">Data Entry Volunteer — AICTE</div><div class="cert-date">Dec 2022 – Jan 2023 · Alwar, Rajasthan</div><a href="https://drive.google.com/file/d/1WaDIYkKIlhY4WU1V92DlzjPCE04Pue1w/view?usp=sharing" target="_blank" rel="noopener" class="cert-verify">Verify Certificate →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section-darkest" id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <div class="section-label">Let's Connect</div>
+        <div class="contact-big-text">Let's Build<br>Something <em>Great</em><br>Together</div>
+        <p class="contact-desc">I'm currently open to full-time opportunities, freelance projects, and collaborations. Feel free to reach out, I'd love to hear from you.</p>
+        <div class="contact-links">
+          <a href="mailto:akshay6885@gmail.com" class="contact-link-item"><div class="contact-link-icon">✉</div><span class="contact-link-text">akshay6885@gmail.com</span></a>
+          <a href="https://www.linkedin.com/in/akshay--kumar-/" target="_blank" rel="noopener" class="contact-link-item"><div class="contact-link-icon">in</div><span class="contact-link-text">linkedin.com/in/akshay--kumar-/</span></a>
+          <a href="https://github.com/AkshayKumar-0" target="_blank" rel="noopener" class="contact-link-item"><div class="contact-link-icon">⌥</div><span class="contact-link-text">github.com/AkshayKumar-0</span></a>
+          <a href="tel:+919982316110" class="contact-link-item"><div class="contact-link-icon">☏</div><span class="contact-link-text">+91 9982316110</span></a>
+        </div>
+      </div>
+      <div class="contact-right reveal reveal-delay-2">
+        <div class="contact-cta-box">
+          <p class="contact-cta-text">"Make it simple, but significant,<br> every pixel should have a purpose."</p>
+          <a href="mailto:akshay6885@gmail.com" class="contact-cta-btn">Send Me an Email</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 <span>Akshay Kumar</span>. All rights reserved. Designed &amp; Developed with ♥</div>
+  <div class="footer-links">
+    <a href="https://github.com/AkshayKumar-0" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+    <a href="https://www.linkedin.com/in/akshay--kumar-/" target="_blank" rel="noopener" class="footer-link">LinkedIn</a>
+    <a href="mailto:akshay6885@gmail.com" class="footer-link">Email</a>
+    <a href="https://drive.google.com/file/d/135vp0tS19JmNHPugWFMyf7rDOc7fWmkZ/view?usp=drive_link" target="_blank" rel="noopener" class="footer-link">Resume</a>
+  </div>
+</footer>
+
+<!-- ✅ FIX 9: All JS moved to end of body, runs after HTML is parsed — no render blocking -->
+<script>
+// ✅ Desktop cursor — gold dot + ring (original behaviour, unchanged)
+if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  const cursor = document.getElementById('cursor');
+  const follower = document.getElementById('cursorFollower');
+  let mx=0,my=0,fx=0,fy=0;
+  document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; cursor.style.left=mx+'px'; cursor.style.top=my+'px'; });
+  function animFollower(){ fx+=(mx-fx)*0.12; fy+=(my-fy)*0.12; follower.style.left=fx+'px'; follower.style.top=fy+'px'; requestAnimationFrame(animFollower); }
+  animFollower();
+  document.querySelectorAll('a,button,.project-card,.cert-card,.skill-category').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ follower.style.width='56px'; follower.style.height='56px'; follower.style.opacity='0.8'; });
+    el.addEventListener('mouseleave',()=>{ follower.style.width='36px'; follower.style.height='36px'; follower.style.opacity='0.5'; });
+  });
+}
+
+// ✅ Mobile cursor — gold tap-ripple on every touch
+if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+  document.addEventListener('touchstart', function(e) {
+    const t = e.touches[0];
+    const ripple = document.createElement('div');
+    ripple.className = 'touch-ripple';
+    ripple.style.left = t.clientX + 'px';
+    ripple.style.top  = t.clientY + 'px';
+    document.body.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+  }, { passive: true });
+}
+
+// ✅ Navbar scroll
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll',()=>{ navbar.classList.toggle('scrolled', window.scrollY>60); }, { passive: true });
+
+// ✅ Typed text — lazy start, only when page is ready
+const roles = ['Front-End Developer','React.js Developer','Next.js Developer','WordPress Developer','Shopify Developer','UI/UX Enthusiast'];
+let ri=0,ci=0,deleting=false;
+const typedEl = document.getElementById('typedText');
+function typeLoop(){
+  const word = roles[ri];
+  if(!deleting){ typedEl.textContent=word.substring(0,ci+1); ci++; if(ci===word.length){deleting=true;setTimeout(typeLoop,1800);return;} }
+  else{ typedEl.textContent=word.substring(0,ci-1); ci--; if(ci===0){deleting=false;ri=(ri+1)%roles.length;setTimeout(typeLoop,400);return;} }
+  setTimeout(typeLoop, deleting?60:110);
+}
+// ✅ Small delay so hero content paints first before JS kicks in
+setTimeout(typeLoop, 600);
+
+// ✅ Scroll reveal — using IntersectionObserver (zero scroll listener overhead)
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ✅ Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+
+// ✅ Mobile menu toggle (hamburger)
+function toggleMenu(){
+  const links = document.querySelector('.nav-links');
+  if(!links) return;
+  if(links.style.display==='flex'){ links.style.display=''; } 
+  else { links.style.cssText='display:flex;flex-direction:column;position:fixed;top:60px;left:0;right:0;background:rgba(13,13,13,0.97);padding:24px;gap:20px;border-top:1px solid rgba(200,169,110,0.15);'; }
+}
+</script>
+</body>
 </html>
