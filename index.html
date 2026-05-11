@@ -10,19 +10,18 @@
 <meta property="og:description" content="I craft responsive, user-friendly web experiences using React.js, Next.js, WordPress & Shopify.">
 <title>Akshay Kumar — Front-End Developer</title>
 
-<!-- ✅ FIX 1: Preconnect to font origins BEFORE font request (saves ~200ms) -->
+<!-- Preconnect to font origins BEFORE font request -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- ✅ FIX 2: Preload hero image so browser fetches it ASAP (put your image path here) -->
+<!-- Preload hero image so browser fetches it ASAP -->
 <link rel="preload" as="image" href="image/profile.webp" fetchpriority="high" type="image/webp">
 
-<!-- ✅ FIX 3: Non-blocking font load with display=swap — text shows immediately in fallback font -->
+<!-- Non-blocking font load with display=swap — text shows immediately in fallback font -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 
 <style>
-  /* Google Fonts URL already includes display=swap — no @font-face needed here */
 
   :root {
     --dark: #0d0d0d; --dark2: #141414; --dark3: #1c1c1c;
@@ -40,7 +39,7 @@
   ::-webkit-scrollbar-track { background: var(--dark); }
   ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
 
-  /* CURSOR — desktop: gold dot + ring (original) */
+  /* CURSOR — desktop: gold dot + ring */
   .cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.1s; }
   .cursor-follower { position: fixed; width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: transform 0.15s ease, width 0.2s, height 0.2s, opacity 0.2s; opacity: 0.5; }
 
@@ -93,7 +92,7 @@
   .btn-secondary { padding: 14px 36px; border: 1px solid rgba(242,236,226,0.2); color: var(--cream3); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
   .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-  /* ✅ FIX 5: Image sizing — no base64, just a proper img element */
+  /*  Image sizing — img element */
   .hero-photo-wrap { width: 340px; height: 420px; position: relative; animation: fadeIn 1s 0.6s ease both; flex-shrink: 0; }
   .hero-photo-border { position: absolute; top: -16px; left: -16px; right: 16px; bottom: 16px; border: 1px solid rgba(200,169,110,0.3); pointer-events: none; }
   .hero-photo {
@@ -101,7 +100,7 @@
     object-fit: cover; object-position: top center;
     display: block;
     filter: grayscale(15%) contrast(1.05);
-    /* ✅ Reserves space while loading — prevents layout shift (CLS) */
+    /* Reserves space while loading — prevents layout shift */
     background-color: var(--dark3);
   }
   .hero-photo-tag { position: absolute; bottom: -28px; left: -28px; background: var(--gold); color: var(--dark); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; padding: 10px 18px; }
@@ -227,13 +226,13 @@
   .reveal-delay-3 { transition-delay:0.3s; }
   .reveal-delay-4 { transition-delay:0.4s; }
 
-  /* ✅ FIX 6: Reduce motion for users who prefer it (also speeds up perceived performance) */
+  /* Reduce motion */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     .reveal { opacity: 1; transform: none; }
   }
 
-  /* ✅ FIX 7: content-visibility defers rendering of off-screen sections (huge mobile win) */
+  /* content-visibility defers rendering of off-screen sections */
   #about, #skills, #experience, #projects, #certifications, #contact {
     content-visibility: auto;
     contain-intrinsic-size: 0 600px; /* estimated section height */
@@ -247,7 +246,7 @@
     .hero-socials { display: none; }
   }
   @media (max-width: 768px) {
-    /* ✅ Mobile has its own touch ripple cursor — hide the desktop dot/ring only */
+    /* Mobile has its own touch ripple cursor — hide desktop dot/ring only */
     body { cursor: auto; }
     .cursor, .cursor-follower { display: none; }
     nav { padding: 18px 24px; }
@@ -257,7 +256,7 @@
     .hero { padding: 100px 24px 60px; }
     .hero-grid { grid-template-columns: 1fr; gap: 48px; }
     .hero-photo-wrap { width: 260px; height: 320px; margin: 0 auto; }
-    /* ✅ Disable heavy bg text on mobile — saves paint cost */
+    /* Disable heavy bg text on mobile — saves paint cost */
     .hero-bg-text { display: none; }
     .hero-scroll { left: 24px; bottom: 24px; }
     .section-inner { padding: 70px 24px; }
@@ -272,7 +271,7 @@
     .timeline-date { text-align: left; padding-right: 0; padding-left: 20px; }
     .timeline-content { padding-left: 20px; }
     footer { flex-direction: column; gap: 16px; text-align: center; padding: 28px 24px; }
-    /* ✅ Reduce animation on mobile for speed */
+    /* Reduce animation on mobile for speed */
     .hero-tag, .hero-name, .hero-role, .hero-desc, .hero-actions, .hero-photo-wrap {
       animation-duration: 0.4s;
       animation-delay: 0s !important;
@@ -287,7 +286,7 @@
 </head>
 <body>
 
-<!-- ✅ Cursor only shown on desktop via CSS above -->
+<!-- Cursor only shown on desktop via CSS above -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-follower" id="cursorFollower"></div>
 
@@ -324,11 +323,6 @@
     </div>
     <div class="hero-photo-wrap">
       <div class="hero-photo-border"></div>
-      <!--
-        ✅ YOUR IMAGE: image/profile.webp (image folder, profile.webp file)
-        fetchpriority="high" = browser downloads this before other images
-        loading="eager"      = do NOT lazy-load (it's above the fold)
-      -->
       <img
         class="hero-photo"
         src="image/profile.webp"
@@ -511,9 +505,9 @@
   </div>
 </footer>
 
-<!-- ✅ FIX 9: All JS moved to end of body, runs after HTML is parsed — no render blocking -->
+<!-- JS to end of body, runs after HTML is parsed — no render blocking -->
 <script>
-// ✅ Desktop cursor — gold dot + ring (original behaviour, unchanged)
+// Desktop cursor — gold dot + ring
 if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   const cursor = document.getElementById('cursor');
   const follower = document.getElementById('cursorFollower');
@@ -527,7 +521,7 @@ if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   });
 }
 
-// ✅ Mobile cursor — gold tap-ripple on every touch
+// Mobile cursor — gold tap-ripple on every touch
 if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
   document.addEventListener('touchstart', function(e) {
     const t = e.touches[0];
@@ -540,11 +534,11 @@ if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
   }, { passive: true });
 }
 
-// ✅ Navbar scroll
+// Navbar scroll
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll',()=>{ navbar.classList.toggle('scrolled', window.scrollY>60); }, { passive: true });
 
-// ✅ Typed text — lazy start, only when page is ready
+// Typed text — lazy start, only when page is ready
 const roles = ['Front-End Developer','React.js Developer','Next.js Developer','WordPress Developer','Shopify Developer','UI/UX Enthusiast'];
 let ri=0,ci=0,deleting=false;
 const typedEl = document.getElementById('typedText');
@@ -554,16 +548,16 @@ function typeLoop(){
   else{ typedEl.textContent=word.substring(0,ci-1); ci--; if(ci===0){deleting=false;ri=(ri+1)%roles.length;setTimeout(typeLoop,400);return;} }
   setTimeout(typeLoop, deleting?60:110);
 }
-// ✅ Small delay so hero content paints first before JS kicks in
+// Small delay so hero content paints first before JS kicks in
 setTimeout(typeLoop, 600);
 
-// ✅ Scroll reveal — using IntersectionObserver (zero scroll listener overhead)
+// Scroll reveal — using IntersectionObserver
 const observer = new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
 }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
-// ✅ Smooth scroll for nav links
+// Smooth scroll for nav links
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const target = document.querySelector(a.getAttribute('href'));
@@ -571,7 +565,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 
-// ✅ Mobile menu toggle (hamburger)
+// Mobile menu toggle
 function toggleMenu(){
   const links = document.querySelector('.nav-links');
   if(!links) return;
