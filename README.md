@@ -1,27 +1,29 @@
-My Portfolio
+# Akshay Kumar Portfolio
 
-Welcome to my portfolio! This project showcases my work as a web developer, demonstrating the skills and technologies I've mastered in front-end development. The portfolio is designed to be simple, responsive, and user-friendly, allowing visitors to explore my projects, learn more about me, and get in touch.
+Welcome to my portfolio! This project showcases my work as a Frontend Developer, highlighting my experience in creating modern, responsive, and user-friendly web applications. The portfolio reflects my skills in frontend development, performance optimization, and clean UI design using modern web technologies.
 
-🛠️ Technologies Used
+## 🛠️ Technologies Used
 
-HTML5 – For structuring the content and layout of the site.
+* HTML5 – Structuring website content and layout.
+* CSS3 – Styling, responsive layouts, and modern UI design.
+* JavaScript – Adding interactivity and dynamic functionality.
+* React.js – Building scalable and reusable frontend components.
+* Next.js – Creating fast and optimized web applications.
+* WordPress & Shopify – Developing responsive business and eCommerce websites.
+* Git & GitHub – Version control and project management.
+* Figma – UI/UX design and prototyping.
 
-CSS3 – For styling the website, including layout, color schemes, and responsive design.
+## 🌟 Features
 
-JavaScript – For adding interactive elements and enhancing user experience.
+* Responsive Design – Optimized for desktop, tablet, and mobile devices.
+* Modern UI/UX – Clean, minimal, and visually engaging interface.
+* Performance Focused – Fast-loading and optimized user experience.
+* Projects Showcase – Featured frontend and web development projects with live demos and source code.
+* Skills & Experience Section – Highlights technical skills, tools, and development experience.
+* Contact Section – Easy ways to connect for opportunities and collaborations.
 
-Git & GitHub – For version control and project hosting.
+## 🚀 Live Demo
 
-🌟 Features
+You can view the live version of my portfolio here:
 
-Responsive Design – The portfolio is fully responsive, ensuring it looks great on all devices, from desktop to mobile.
-
-Projects Section – A showcase of my key projects with links to live demos and GitHub repositories.
-
-Contact Form – A simple form for visitors to reach out to me easily.
-
-About Me Section – An introduction to who I am and my approach to web development.
-
-🚀 Live Demo
-
-You can view the live version of my portfolio [here.](https://akshaykumar-0.github.io/my-portfolio/)
+https://akshaykumar-0.github.io/akshaykumar-portfolio/
